@@ -1,6 +1,39 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <script tyle= "text/javascript">
+        var messages = null;
+        var submit = null; 
+        var text = null;
+        var color = null;
+        var date = null;
+
+        window.addEventListener('load',function(){
+            messages=document.getElementById('messages');
+            submit = document.getElementById('submit');
+            submit.addEventListener('click', sendData);
+            text = document.getElementById('text');
+            color = document.getElementById('color');
+            date = document.getElementById('date');
+
+
+        });
+
+        function sendData(){
+            fetch('/formdata?text='+text.value+'&color='+color.value+'&date='+date.value)
+  .then(response => response.json())
+  .then(data => populateMessages(data));
+        }
+
+        function populateMessages(newmessages) {
+                messages.innerHTML = "";
+                for (var i = 0; i < newmessages.length; i++)
+                {
+                    messages.innerHTML = messages.innerHTML + newmessages[i].text + "<br />";
+                }
+            } 
+        </script>
+
 <!-- <topic>Dairy 2.0</topic> -->
 <!-- <link rel="stylesheet" href="try.css"> -->
 <style>
@@ -39,15 +72,16 @@ input[type=submit]{
     </head>
 
     <body>
-        <div class="background" width="100%">What was your most memoriable moment of self-explor？</div>
-        <form method="POST" action ="/formdata">
+        <div id ="messages">previous message</div>
+        <div class="background" width="100%">What was your most memoriable moment of self-explor?</div>
+        <form>
             <label for="data"></label>
-            <input type="text" name="data" Value="Give it a topic （make it more easy to find yourself later）"><br/>
-            <input type="color" name="color"><br/>
+            <input type="text" id ="text"name="data" Value="Give it a topic （make it more easy to find yourself later）"><br/>
+            <input type="color" id="color" name="color"><br/>
             <textarea name="longtext" cols="80" rows="10">
             </textarea><br/>
-            <input type="date" name="date" value="2021-02-21" min="2021-02-21" max="2022-02-21"><br/>
-            <input type="submit" name="submit" Value="submit"><br/>
+            <input type="date" id ="date" name="date" value="2021-02-21" min="2021-02-21" max="2022-02-21"><br/>
+            <input type="button" id="submit" name="submit" Value="submit"><br/>
         </form>
 
   
