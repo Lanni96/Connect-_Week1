@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <!-- <title>Memory display</title> -->
+        <style>
+            h1{
+                color:black;
+                font-size: 30px;
+                top:10px;
+                left:100px;
+            }
+            body{
+                position: relative;
+                top:0px;
+                background-color: rgb(255, 255, 255);
+            }
+            div{
+                position: relative;
+                top:50px;
+                left:100px;
+
+
+            }       
+            div[class=search]{
+                position: fixed;
+                /* bottom:2250px; */
+                /* left:800px; */
+
+
+            }           
+
+        </style>
+    </head>
+    <body>
+        <h1>Memory display</h1>
+        <form method="GET" action ="/formdata">
+            <label for="data"></label>
+            <!-- <input type="text" name="data" Value="enter something"><br/>
+            <input type="color" name="color"><br/>
+            <textarea name="longtext" cols="80" rows="10">
+            </textarea><br/>
+            <input type="date" name="date" value="2021-02-21" min="2021-02-21" max="2022-02-21"><br/>
+            <input type="submit" name="submit" Value="submit"><br/> -->
+
+        </form>
+        
+        <% 
+            if (data.length > 0) {
+                for (var i = 0; i < data.length; i++) { 
+        %> 
+                    <div id="dataout<%= i %>" style="color: <%= data[i].color %>"><a href="/displayrecord?_id=<%= data[i]._id %>"><%= data[i].text %></a></div>
+        <% 
+                } 
+            }
+        %>
+
+        <div class="search">
+            Search 
+            <form method="GET" action="/search">
+                <input type="text" name="q">
+                <input type="submit" value="Search for it">
+            </form>
+
+        </div>
+
+    </body>
+</html>
